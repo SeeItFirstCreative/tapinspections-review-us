@@ -99,6 +99,13 @@ input:focus,select:focus,textarea:focus{border-color:#74b9dd;box-shadow:0 0 0 3p
  #googlePanel .actions{margin-top:18px}
  .footer{width:calc(100% - 28px)}
 }
+
+/* Five-star confirmation: compact at every breakpoint */
+#googlePanel .back{margin-bottom:12px}
+#googlePanel .five-status{display:flex;align-items:center;gap:7px;margin-bottom:10px}
+#googlePanel .five-status .success{width:auto;height:auto;flex:0 0 auto;border:0;background:transparent;border-radius:0;font-size:18px;line-height:1;color:#297657;margin:0}
+#googlePanel .five-status .kicker{margin:0}
+
 </style>
 </head>
 <body>
@@ -150,7 +157,10 @@ input:focus,select:focus,textarea:focus{border-color:#74b9dd;box-shadow:0 0 0 3p
             <div class="full"><label for="comments">Tell us more</label><textarea id="comments" required placeholder="Share your feedback..."></textarea></div>
           </div>
           <div class="actions"><button class="primary" id="sendFeedbackBtn" type="submit">Send Private Feedback</button></div><div class="send-error" id="sendError">We couldn’t send your feedback right now. Please try again.</div>
-          <div class="public-option"><div class="public-option-copy"><strong>Prefer to share your experience publicly?</strong><span>You can also write a review on Google.</span></div><a class="public-option-link" href="https://search.google.com/local/writereview?placeid=ChIJj_JwK7TLEhQRzVYzoCqNyr0" target="_blank" rel="noopener">Write a Google Review</a></div>
+          <div class="public-option">
+            <div class="public-option-copy"><strong>Prefer to share your experience publicly?</strong><span>You can also write a review on Google.</span></div>
+            <a class="public-option-link" href="https://search.google.com/local/writereview?placeid=ChIJj_JwK7TLEhQRzVYzoCqNyr0" target="_blank" rel="noopener">Write a Google Review</a>
+          </div>
         </form>
       </div>
 
@@ -174,19 +184,24 @@ input:focus,select:focus,textarea:focus{border-color:#74b9dd;box-shadow:0 0 0 3p
 const panels=[...document.querySelectorAll('.panel')],stars=[...document.querySelectorAll('.star')];let chosen=0;
 function show(id){panels.forEach(p=>p.classList.toggle('active',p.id===id));window.scrollTo({top:0,behavior:'smooth'});}
 function paint(n,cls){stars.forEach((s,i)=>s.classList.toggle(cls,i<n));}
-function routeRating(n){
-  chosen=n;
+function routeRating(rating){
+  chosen=rating;
   paint(chosen,'selected');
-  if(chosen===5){show('googlePanel');return;}
-  document.getElementById('feedbackScore').textContent=`${chosen} of 5`;
-  document.getElementById('feedbackStars').textContent='★'.repeat(chosen)+'☆'.repeat(5-chosen);
-  show('feedbackPanel');
+  if(chosen===5){
+    show('googlePanel');
+  }else{
+    document.getElementById('feedbackScore').textContent=`${chosen} of 5`;
+    document.getElementById('feedbackStars').textContent='★'.repeat(chosen)+'☆'.repeat(5-chosen);
+    show('feedbackPanel');
+  }
 }
 stars.forEach((s,i)=>{s.addEventListener('mouseenter',()=>paint(i+1,'hover'));s.addEventListener('mouseleave',()=>stars.forEach(x=>x.classList.remove('hover')));s.addEventListener('click',()=>{chosen=+s.dataset.rating;paint(chosen,'selected');setTimeout(()=>routeRating(chosen),160);});});
 document.querySelectorAll('[data-back]').forEach(b=>b.addEventListener('click',()=>show('ratingPanel')));
 document.getElementById('fiveFeedback').addEventListener('click',()=>{chosen=5;document.getElementById('feedbackScore').textContent='5 of 5';document.getElementById('feedbackStars').textContent='★★★★★';show('feedbackPanel');});
-const deepRating=Number(new URLSearchParams(window.location.search).get('rating'));
-if(Number.isInteger(deepRating)&&deepRating>=1&&deepRating<=5){routeRating(deepRating);}
+const initialRating=Number.parseInt(new URLSearchParams(window.location.search).get('rating'),10);
+if(Number.isInteger(initialRating) && initialRating>=1 && initialRating<=5){
+  routeRating(initialRating);
+}
 document.getElementById('feedbackForm').addEventListener('submit',async e=>{
   e.preventDefault();
   const form=e.currentTarget;

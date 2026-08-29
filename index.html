@@ -69,6 +69,7 @@ input:focus,select:focus,textarea:focus{border-color:#74b9dd;box-shadow:0 0 0 3p
 .subtle-review-link:hover{color:var(--blue-deep)}
 .google-card{margin-top:28px;background:linear-gradient(180deg,#f8fcfe,#eef7fb);border:1px solid #cfe4ee;border-radius:16px;padding:20px;display:flex;gap:16px;align-items:center}.google-g{width:46px;height:46px;flex:0 0 46px;border-radius:50%;background:#fff;border:1px solid #dbe8ee;display:grid;place-items:center;font-size:22px;font-weight:900;color:#4285f4}.google-card strong{display:block;color:var(--blue-dark);font-size:18px;margin-bottom:4px}.google-card p{margin:0;color:#667b88;font-size:13px;line-height:1.45}.google-card .primary{margin-left:auto;white-space:nowrap}
 .success{width:66px;height:66px;border-radius:50%;display:grid;place-items:center;background:#eaf7f2;color:#297657;border:1px solid #cde7db;font-size:30px;margin-bottom:22px}
+.five-status{display:block}
 .note{font-size:11px;line-height:1.55;color:#768b97;margin-top:16px}.send-error{display:none;margin-top:12px;color:#a33;font-size:11px;line-height:1.45}
 .footer{width:min(1120px,calc(100% - 40px));margin:0 auto;padding:8px 0 24px;text-align:center;color:#627987;font-size:10px;letter-spacing:.05em;line-height:1.6;position:relative;z-index:2}
 .footer b{color:var(--blue-deep)}
@@ -78,6 +79,17 @@ input:focus,select:focus,textarea:focus{border-color:#74b9dd;box-shadow:0 0 0 3p
  h1{font-size:39px}.lead{font-size:14px;line-height:1.55}.rating-block{margin-top:27px;padding-top:23px}.stars{gap:6px}.star{height:61px;border-radius:11px;font-size:33px}.scale{font-size:10px}
  .proof{grid-template-columns:1fr;padding:14px 17px;gap:9px}.proof-item,.proof-item:first-child,.proof-item:last-child{border:0;padding:0;text-align:left;display:flex;justify-content:space-between;gap:8px;align-items:center}.proof-item span{margin:0;text-align:right}
  .formgrid{grid-template-columns:1fr}.full{grid-column:auto}.chips{grid-template-columns:1fr 1fr}.actions{flex-direction:column;align-items:stretch}.secondary-link{text-align:center}.subtle-review-link{font-size:9px;margin-top:16px}.google-card{align-items:flex-start;flex-wrap:wrap}.google-card .primary{margin:0;width:100%}
+ #googlePanel{padding:24px 22px 26px}
+ #googlePanel .back{margin-bottom:17px}
+ #googlePanel .five-status{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+ #googlePanel .success{width:42px;height:42px;flex:0 0 42px;font-size:21px;margin:0}
+ #googlePanel .kicker{margin:0}
+ #googlePanel h1{font-size:36px;line-height:1.01}
+ #googlePanel .lead{margin-top:12px}
+ #googlePanel .google-card{margin-top:20px;padding:16px}
+ #googlePanel .google-g{width:40px;height:40px;flex-basis:40px;font-size:19px}
+ #googlePanel .google-card strong{font-size:17px}
+ #googlePanel .actions{margin-top:18px}
  .footer{width:calc(100% - 28px)}
 }
 </style>
@@ -138,8 +150,7 @@ input:focus,select:focus,textarea:focus{border-color:#74b9dd;box-shadow:0 0 0 3p
 
       <div class="inner panel" id="googlePanel">
         <button class="back" data-back>← Change rating</button>
-        <div class="success">✓</div>
-        <div class="kicker">Thank You</div>
+        <div class="five-status"><div class="success">✓</div><div class="kicker">Thank You</div></div>
         <h1>We appreciate your confidence.</h1>
         <p class="lead">If you have a moment, you can share your experience on Google to help other Southwest Florida property owners know what to expect.</p>
         <div class="google-card"><div class="google-g">G</div><div><strong>Review T.A.P. Inspections on Google</strong><p>Open the Google review page and share your experience.</p></div><a class="primary" href="https://www.google.com/maps/place/T.A.P%2BInspections%2B-%2BMarco%2BIsland/@25.9352407,-81.7821778,12z/data=!4m8!3m7!1s0x1412cbb42b70f28f:0xbdca8d2aa03356cd!8m2!3d25.935264!4d-81.6997763!9m1!1b1!16s%2Fg%2F11b779rnpr" target="_blank" rel="noopener">Open Google Review</a></div>
